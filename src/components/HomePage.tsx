@@ -1,18 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Search, Star } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { BlogCard } from "./Blog-card";
 import { Sidebar } from "./Sidebar";
-import { Badge } from "@/components/ui/badge";
+
 import {
   Carousel,
   CarouselContent,
@@ -20,20 +14,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import Link from "next/link";
+
+import EventCard from "./custom/EventCard";
+import DestinationCard from "./custom/DestinationCard";
+
 const TourismHomepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const popularDestinations = [
     {
-      name: "Jembatan Ampera",
-      rating: 4.8,
-      images: "/jembatanampera.jpeg",
-      reviews: "2.3k",
-      badges: ["Nature", "Culture"],
-    },
-    {
       name: "Palembang Indah Mall ",
       rating: 4.9,
       images: "/pim.jpeg",
@@ -67,6 +56,40 @@ const TourismHomepage = () => {
       images: "/museum.jpeg",
       reviews: "4.2k",
       badges: ["Culture", "Education"],
+    },
+  ];
+  const event = [
+    {
+      id: "1",
+      name: "Oasis Champaign Supernova",
+
+      images: "/eventmusic.png",
+    },
+    {
+      id: "2",
+      name: "Weekly Bike",
+
+      images: "/sepeda.png",
+    },
+    {
+      id: "3",
+      name: "Pagelaran Wayang",
+      images: "/wayang.png",
+    },
+    {
+      id: "4",
+      name: "Oasis Champaign Supernova",
+      images: "/eventmusic.png",
+    },
+    {
+      id: "5",
+      name: "Pagelaran Wayang",
+      images: "/wayang.png",
+    },
+    {
+      id: "6",
+      name: "Pemuda Berkarya",
+      images: "/pemuda.png",
     },
   ];
   const posts = [
@@ -127,7 +150,7 @@ const TourismHomepage = () => {
             <source src="/palepale.mov" type="video/mp4" />
           </video>
           {/* Add overlay */}
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 py-32">
@@ -167,98 +190,33 @@ const TourismHomepage = () => {
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="max-w-7xl mx-auto px-4 ">
-        {/* <div className="grid md:grid-cols-3 gap-8">
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <MapPin className="text-blue-600" size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2">Interactive Maps</h3>
-                  <p className="text-gray-600">
-                    Explore attractions with real-time crowd levels
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Clock className="text-blue-600" size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2">Smart Itineraries</h3>
-                  <p className="text-gray-600">
-                    Create personalized travel plans
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Camera className="text-blue-600" size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2">Virtual Tours</h3>
-                  <p className="text-gray-600">Preview with 360° experiences</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div> */}
-      </div>
-
       {/* Popular Destinations */}
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold mb-8">Popular Destinations</h2>
+        <h2 className="text-xl font-bold my-8 text-[#152A4E]">Event</h2>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 gap-4 p-0">
+          {event.map((el) => (
+            <EventCard
+              href={el.id}
+              imageSrc={el.images}
+              key={el.id}
+              title={el.name}
+            />
+          ))}
+        </div>
+        <h2 className="text-xl font-bold my-8">Popular Destination</h2>
         <Carousel>
           <CarouselContent>
             {popularDestinations.map((destination, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
-                <Link href={`detail/${destination.name}`}>
-                  <Card className="overflow-hidden">
-                    <Image
-                      src={destination.images}
-                      alt={destination.name}
-                      width={358}
-                      height={192}
-                      className="w-full h-48 object-cover hover:scale-105 duration-300"
-                    />
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <CardTitle>{destination.name}</CardTitle>
-                        <div className="flex items-center">
-                          <Star className="text-yellow-400 mr-1" size={16} />
-                          <span>{destination.rating}</span>
-                          <span className="text-sm text-gray-500 ml-1">
-                            ({destination.reviews})
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex gap-2 mt-2">
-                        {destination.badges.map((badge, i) => (
-                          <Badge key={i} variant="secondary">
-                            {badge}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardHeader>
-                    <CardFooter>
-                      <Button className="w-full">Explore</Button>
-                    </CardFooter>
-                  </Card>
-                </Link>
+                <DestinationCard
+                  badges={destination.badges}
+                  href={destination.name}
+                  imageSrc={destination.images}
+                  name={destination.name}
+                  rating={destination.rating}
+                  reviews={destination.reviews}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>
