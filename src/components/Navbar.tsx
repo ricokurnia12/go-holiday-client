@@ -23,13 +23,15 @@ export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="bg-white shadow">
+    <nav className={`bg-white shadow ${pathname === "/admin" ? "hidden" : ""}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex md:justify-center h-16">
           <div className="flex justify-center">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
-                <span className="text-2xl font-bold text-gray-800">Go-Holiday</span>
+                <span className="text-2xl font-bold text-gray-800">
+                  Go-Holiday
+                </span>
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
