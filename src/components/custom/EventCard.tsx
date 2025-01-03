@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import { BASE_PATH } from "../basepath";
 interface EventCardProps {
   href: string;
   imageSrc: string;
@@ -14,7 +14,7 @@ const EventCard: React.FC<EventCardProps> = ({ href, imageSrc, title }) => {
       className="group relative aspect-[9/16] overflow-hidden rounded-lg"
     >
       <Image
-        src={imageSrc}
+        src={`${BASE_PATH}${imageSrc}`}
         alt={`View of ${title}`}
         className="object-cover transition-transform duration-300 group-hover:scale-110"
         fill

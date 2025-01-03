@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
+import { BASE_PATH } from "../basepath";
 
 interface DestinationCardProps {
   href: string;
@@ -22,10 +23,10 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   badges,
 }) => {
   return (
-    <Link href={href}>
+    <Link href={`detail/${href}`}>
       <div className="overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
         <Image
-          src={imageSrc}
+          src={`${BASE_PATH}${imageSrc}`}
           alt={name}
           width={358}
           height={192}
